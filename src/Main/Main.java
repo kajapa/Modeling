@@ -26,7 +26,7 @@ public class Main extends JFrame {
         objects.add(t);
         super.setSize(width, height);
 
-        Painting paint = new Painting(objects, width, height, Color.BLUE);
+        Painting paint = new Painting(objects, width, height, Color.YELLOW);
 
 
         super.setLayout(new BorderLayout());

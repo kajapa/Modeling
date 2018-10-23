@@ -59,17 +59,36 @@ public class Triangle extends Object {
 
     @Override
     public boolean SetPixel(int x, int y) {
+        boolean tl1 = false;
+        boolean tl2 = false;
+        boolean tl3 = false;
+        if (dy12 < 0 || (dy12 == 0 && dx12 > 0)) {
+            tl1 = true;
+            System.out.println("Check1");
+        }
 
+        if (dy23 < 0 || (dy23 == 0 && dx23 > 0)) {
+            tl2 = true;
+            System.out.println("Check2");
+        }
+
+        if (dy31 < 0 || (dy31 == 0 && dx31 > 0)) {
+            tl3 = true;
+
+        }
         float t1 = (dx12) * (y - a.y) - (dy12) * (x - a.x);
         float t2 = (dx23) * (y - b.y) - (dy23) * (x - b.x);
         float t3 = (dx31) * (y - c.y) - (dy31) * (x - c.x);
-        if (t1 > 0 && t2 > 0 && t3 > 0) {
 
-            return true;
-        } else {
-            //System.out.println("Nope");
-            return false;
-        }
+
+            if (t1 > 0 && t2 > 0 && t3 >= 0) {
+
+                return true;
+            } else {
+                //System.out.println("Nope");
+                return false;
+            }
+
     }
 
     @Override
@@ -91,22 +110,25 @@ public class Triangle extends Object {
 
     @Override
     public Color GetInterpolarColor(int x, int y) {
+
         Vector Lambda = GetLambda(x, y);
 
-        Vector aL = super.col1.multiplyby(Lambda.x);
+        float red = super.col1.x * Lambda.x + super.col2.x * Lambda.y + super.col3.x * Lambda.z;
+        float green = super.col1.y * Lambda.x + super.col2.y * Lambda.y + super.col3.y * Lambda.z;
+        float blue = super.col1.z * Lambda.x + super.col2.z * Lambda.y + super.col3.z * Lambda.z;
 
-        Vector bL = super.col2.multiplyby(Lambda.y);
-        Vector cL = super.col3.multiplyby(Lambda.z);
-        Vector res = aL.addVector(bL).addVector(cL);
-        res.VectortoString();
-        return res.VectortoColor();
+        Vector result = new Vector(red, green, blue);
+
+
+        return result.VectortoColor();
     }
 
 
     public Vector GetLambda(int x, int y) {
         Vector res;
-        L1 = ((dy23) * (x - c.x) + (LX32) * (y - c.y)) / ((dy23) * (a.x - c.x) + (LX32) * (a.y - c.y));
-        L2 = ((dy31) * (x - c.x) + (LX13) * (y - c.y)) / ((dy31) * (c.x - c.x) + (LX13) * (b.y - c.y));
+        L1 = ((dy23 * (x - c.x)) + (LX32 * (y - c.y))) / ((dy23 * (a.x - c.x)) + (LX32 * (a.y - c.y)));
+
+        L2 = ((dy31) * (x - c.x) + (LX13) * (y - c.y)) / ((dy31) * (b.x - c.x) + (LX13) * (b.y - c.y));
         L3 = 1 - L1 - L2;
         res = new Vector(L1, L2, L3);
         return res;

@@ -36,6 +36,10 @@ public class Vector {
 
     public Color VectortoColor()
     {
-        return new Color(this.x,this.y,this.z);
+        return new Color((int)this.x,(int)this.y,(int)this.z);
+    }
+    public Vector multi(Vector a)
+    {
+        return new Vector(this.x*a.x,this.y*a.y,this.z*a.z);
     }
 }
