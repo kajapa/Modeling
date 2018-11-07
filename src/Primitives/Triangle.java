@@ -14,7 +14,7 @@ public class Triangle extends Object {
     Vector col3;
     int width;
     int height;
-    int bar = 50;
+    int bar = 20;
     float dx12;
     float dx23;
     float dx31;
@@ -64,12 +64,12 @@ public class Triangle extends Object {
         boolean tl3 = false;
         if (dy12 < 0 || (dy12 == 0 && dx12 > 0)) {
             tl1 = true;
-            System.out.println("Check1");
+           // System.out.println("Check1");
         }
 
         if (dy23 < 0 || (dy23 == 0 && dx23 > 0)) {
             tl2 = true;
-            System.out.println("Check2");
+           // System.out.println("Check2");
         }
 
         if (dy31 < 0 || (dy31 == 0 && dx31 > 0)) {
@@ -81,13 +81,15 @@ public class Triangle extends Object {
         float t3 = (dx31) * (y - c.y) - (dy31) * (x - c.x);
 
 
-            if (t1 > 0 && t2 > 0 && t3 >= 0) {
+        if (    ((t1 > 0 && tl1 == false) || (t1 >= 0 && tl1 == true)) &&
+                ((t2 > 0 && tl2 == false) || (t2 >= 0 && tl2)) &&
+                ((t3 > 0 && tl3 == false) || (t3 >= 0 && tl3))) {
 
-                return true;
-            } else {
-                //System.out.println("Nope");
-                return false;
-            }
+            return true;
+        } else {
+            //System.out.println("Nope");
+            return false;
+        }
 
     }
 
@@ -155,6 +157,12 @@ public class Triangle extends Object {
             }
         }
         return minValue;
+    }
+
+    public float GetDepth(int x, int y){
+        Vector Lambda = GetLambda(x, y);
+
+        return Lambda.x*a.z+Lambda.y*b.z+Lambda.z*c.z;
     }
 
 

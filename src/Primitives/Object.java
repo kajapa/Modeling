@@ -19,4 +19,5 @@ public abstract class Object {
     public abstract boolean CheckQuad(int x,int y);
 
     public abstract Color GetInterpolarColor(int x, int y);
+    public abstract float  GetDepth(int x, int y);
 }

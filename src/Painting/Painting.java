@@ -20,6 +20,7 @@ public class Painting extends JPanel implements ActionListener {
     private BufferedImage paintImage;
     Color col;
     List<Object> objects = new ArrayList<Object>();
+    List<Float> bufforDepth = new  ArrayList<Float>();
 
     JButton button = new JButton("Save Image");
 
@@ -35,6 +36,11 @@ public class Painting extends JPanel implements ActionListener {
         this.width = width;
         this.height = height;
         this.col = col;
+
+        for(int i = 0; i < width * height; i++) {
+            bufforDepth.add(-1f);
+        }
+
     }
 
     @Override
@@ -47,18 +53,17 @@ public class Painting extends JPanel implements ActionListener {
                 for (Object object : objects) {
 
                     if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
+                        float depth = object.GetDepth(i,j);
+                        if(depth > bufforDepth.get(i+width*j)) {
 
-                        g2d.setColor(object.GetInterpolarColor(i,j));
-                        g2.setColor(object.GetInterpolarColor(i,j));
+                            g2d.setColor(object.GetInterpolarColor(i, j));
+                            g2.setColor(object.GetInterpolarColor(i, j));
 
-                        g2d.fillRect(i, j, 1, 1);
-                        g2.fillRect(i, j, 1, 1);
-                    } else {
-                        g2d.setColor(col);
-                        g2.setColor(col);
+                            g2d.fillRect(i, j, 1, 1);
+                            g2.fillRect(i, j, 1, 1);
 
-                        g2d.fillRect(i, j, 1, 1);
-                        g2.fillRect(i, j, 1, 1);
+                            bufforDepth.set(i+width*j, depth);
+                        }
                     }
                 }
 
