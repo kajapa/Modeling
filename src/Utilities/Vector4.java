@@ -1,36 +1,36 @@
 package Utilities;
 
 public class Vector4 {
-   public float a;
-    public float b;
-    public  float c;
-    public  float d;
+   public float x;
+    public float y;
+    public  float z;
+    public  float w;
 
-    public Vector4(float a, float b, float c, float d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+    public Vector4(float x, float y, float z, float w) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = w;
     }
     public Vector4(){
 
-        this.a=0;
-        this.b=0;
-        this.c=0;
-        this.d=1;
+        this.x =0;
+        this.y =0;
+        this.z =0;
+        this.w =1;
     }
-    public Vector4(Vector v,float d){
-        this.a=v.x;
-        this.b=v.y;
-        this.c=v.z;
-        this.b=d;
+    public Vector4(Vector v,float w){
+        this.x =v.x;
+        this.y =v.y;
+        this.z =v.z;
+        this.y = w;
     }
 
     public float dot(Vector4 v) {
-        return this.a * v.a + this.b * v.b + this.c * v.c+this.d*v.d;
+        return this.x * v.x + this.y * v.y + this.z * v.z +this.w *v.w;
     }
     public String VectortoString(){
-        return this.a+"\n"+this.b+"\n"+this.c+"\n"+this.d;
+        return this.x +"\n"+this.y +"\n"+this.z +"\n"+this.w;
     }
 }
 

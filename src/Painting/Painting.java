@@ -1,6 +1,7 @@
 package Painting;
 
 import Primitives.Object;
+import Primitives.Triangle;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,12 +20,12 @@ public class Painting extends JPanel implements ActionListener {
 
     private BufferedImage paintImage;
     Color col;
-    List<Object> objects = new ArrayList<Object>();
+    List<Triangle> objects = new ArrayList<Triangle>();
     List<Float> bufforDepth = new  ArrayList<Float>();
 
     JButton button = new JButton("Save Image");
 
-    public Painting(List<Object> objects, int width, int height, Color col) {
+    public Painting(List<Triangle> objects, int width, int height, Color col) {
         paintImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
         super.setDoubleBuffered(true);
         this.objects = objects;
@@ -48,9 +49,10 @@ public class Painting extends JPanel implements ActionListener {
 
         Graphics2D g2d = (Graphics2D) g;
         Graphics2D g2 = paintImage.createGraphics();
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                for (Object object : objects) {
+                for (Triangle object : objects) {
 
                     if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
                         float depth = object.GetDepth(i,j);
@@ -63,8 +65,14 @@ public class Painting extends JPanel implements ActionListener {
                             g2.fillRect(i, j, 1, 1);
 
                             bufforDepth.set(i+width*j, depth);
+
                         }
+
+
+
                     }
+
+
                 }
 
             }

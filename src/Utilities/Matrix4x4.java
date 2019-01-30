@@ -42,16 +42,16 @@ public class Matrix4x4 {
 
                 switch (i) {
                     case 0:
-                        temp = new Vector4(this.matrix[0].a, this.matrix[1].a, this.matrix[2].a, this.matrix[3].a);
+                        temp = new Vector4(this.matrix[0].x, this.matrix[1].x, this.matrix[2].x, this.matrix[3].x);
                         break;
                     case 1:
-                        temp = new Vector4(this.matrix[0].b, this.matrix[1].b, this.matrix[2].b, this.matrix[3].b);
+                        temp = new Vector4(this.matrix[0].y, this.matrix[1].y, this.matrix[2].y, this.matrix[3].y);
                         break;
                     case 2:
-                        temp = new Vector4(this.matrix[0].c, this.matrix[1].c, this.matrix[2].c, this.matrix[3].c);
+                        temp = new Vector4(this.matrix[0].z, this.matrix[1].z, this.matrix[2].z, this.matrix[3].z);
                         break;
                     case 3:
-                        temp = new Vector4(this.matrix[0].d, this.matrix[1].d, this.matrix[2].d, this.matrix[3].d);
+                        temp = new Vector4(this.matrix[0].w, this.matrix[1].w, this.matrix[2].w, this.matrix[3].w);
                         break;
                     default:
 
@@ -85,7 +85,7 @@ public class Matrix4x4 {
     public Vector4 multiplyMatrix4(float[][] a, Vector4 v) {
         int m = a.length;
         int n = a[0].length;
-        float[] x = {v.a, v.b, v.c, v.d};
+        float[] x = {v.x, v.y, v.z, v.w};
         if (x.length != n) throw new RuntimeException("Illegal matrix dimensions.");
         float[] y = new float[m];
         for (int i = 0; i < m; i++) {
@@ -114,19 +114,28 @@ public class Matrix4x4 {
 
     public Matrix4x4 transmatrix() {
 
-        Vector4 a = new Vector4(this.matrix[0].a, this.matrix[1].a, this.matrix[2].a, this.matrix[3].a);
-        Vector4 b = new Vector4(this.matrix[0].b, this.matrix[1].b, this.matrix[2].b, this.matrix[3].b);
-        Vector4 c = new Vector4(this.matrix[0].c, this.matrix[1].c, this.matrix[2].c, this.matrix[3].c);
-        Vector4 d = new Vector4(this.matrix[0].d, this.matrix[1].d, this.matrix[2].d, this.matrix[3].d);
+        Vector4 a = new Vector4(this.matrix[0].x, this.matrix[1].x, this.matrix[2].x, this.matrix[3].x);
+        Vector4 b = new Vector4(this.matrix[0].y, this.matrix[1].y, this.matrix[2].y, this.matrix[3].y);
+        Vector4 c = new Vector4(this.matrix[0].z, this.matrix[1].z, this.matrix[2].z, this.matrix[3].z);
+        Vector4 d = new Vector4(this.matrix[0].w, this.matrix[1].w, this.matrix[2].w, this.matrix[3].w);
 
         return new Matrix4x4(a, b, c, d);
     }
 
     public void MatrixtoString() {
-        System.out.println(this.matrix[0].a + "," + this.matrix[1].a + "," + this.matrix[2].a + "," + this.matrix[3].a);
-        System.out.println(this.matrix[0].b + "," + this.matrix[1].b + "," + this.matrix[2].b + "," + this.matrix[3].b);
-        System.out.println(this.matrix[0].c + "," + this.matrix[1].c + "," + this.matrix[2].c + "," + this.matrix[3].c);
-        System.out.println(this.matrix[0].d + "," + this.matrix[1].d + "," + this.matrix[2].d + "," + this.matrix[3].d);
+        System.out.println(this.matrix[0].x + "," + this.matrix[1].x + "," + this.matrix[2].x + "," + this.matrix[3].x);
+        System.out.println(this.matrix[0].y + "," + this.matrix[1].y + "," + this.matrix[2].y + "," + this.matrix[3].y);
+        System.out.println(this.matrix[0].z + "," + this.matrix[1].z + "," + this.matrix[2].z + "," + this.matrix[3].z);
+        System.out.println(this.matrix[0].w + "," + this.matrix[1].w + "," + this.matrix[2].w + "," + this.matrix[3].w);
+    }
+
+    public Vector4 multimatrixbyV3(Matrix4x4 m, Vector v) {
+
+
+        return new Vector4(m.matrix[0].x * v.x + m.matrix[1].x * v.y + m.matrix[2].x + m.matrix[3].x,
+                m.matrix[0].y * v.x + m.matrix[1].y * v.y + m.matrix[2].y + m.matrix[3].y,
+                m.matrix[0].z * v.x + m.matrix[1].z * v.y + m.matrix[2].z + m.matrix[3].z,
+                m.matrix[0].w * v.x + m.matrix[1].w * v.y + m.matrix[2].w + m.matrix[3].w);
     }
 
 }
