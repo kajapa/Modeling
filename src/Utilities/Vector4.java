@@ -23,7 +23,7 @@ public class Vector4 {
         this.x =v.x;
         this.y =v.y;
         this.z =v.z;
-        this.y = w;
+        this.w = w;
     }
 
     public float dot(Vector4 v) {

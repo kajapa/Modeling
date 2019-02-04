@@ -129,13 +129,13 @@ public class Matrix4x4 {
         System.out.println(this.matrix[0].w + "," + this.matrix[1].w + "," + this.matrix[2].w + "," + this.matrix[3].w);
     }
 
-    public Vector4 multimatrixbyV3(Matrix4x4 m, Vector v) {
+    public static Vector4  multimatrixbyV3(Matrix4x4 m, Vector v) {
 
 
-        return new Vector4(m.matrix[0].x * v.x + m.matrix[1].x * v.y + m.matrix[2].x + m.matrix[3].x,
-                m.matrix[0].y * v.x + m.matrix[1].y * v.y + m.matrix[2].y + m.matrix[3].y,
-                m.matrix[0].z * v.x + m.matrix[1].z * v.y + m.matrix[2].z + m.matrix[3].z,
-                m.matrix[0].w * v.x + m.matrix[1].w * v.y + m.matrix[2].w + m.matrix[3].w);
+        return new Vector4(m.matrix[0].x * v.x + m.matrix[1].x * v.y + m.matrix[2].x*v.z + m.matrix[3].x,
+                            m.matrix[0].y * v.x + m.matrix[1].y * v.y + m.matrix[2].y*v.z + m.matrix[3].y,
+                            m.matrix[0].z * v.x + m.matrix[1].z * v.y + m.matrix[2].z*v.z + m.matrix[3].z,
+                            m.matrix[0].w * v.x + m.matrix[1].w * v.y + m.matrix[2].w*v.z + m.matrix[3].w);
     }
 
 }

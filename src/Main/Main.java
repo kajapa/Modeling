@@ -40,14 +40,19 @@ public class Main extends JFrame {
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setVisible(true);
 
-        VertexProcessor vt = new VertexProcessor();
+        VertexProcessor vt = new VertexProcessor(orange, pink, yellow, width, height);
         vt.setPerspective(45, 1, 1, 100);
-        vt.setLookat(new Vector(0,0,-50), new Vector(0,0,0),new Vector(0,0,0));
+        vt.setLookat(new Vector(0,0,-100000), new Vector(0,0,0),new Vector(0,1,0));
+        vt.Obj2world();
+       //vt.multiByTranslation(new Vector(100,-30000,0));
+        vt.multiByRototation(90,new Vector(1,0,0));
+        //vt.multiByScale(new Vector(0.5f,0.5f,0.5f));
         vt.PrepareTransformation();
 
 
-     objects=  load.LoadTriangles("cube.obj", orange, pink, yellow, width, height,vt.obj2proj);
-        Painting paint = new Painting(objects, width, height, Color.YELLOW);
+     objects=  load.LoadTriangles("czajnik.obj", orange, pink, yellow, width, height);
+
+        Painting paint = new Painting(vt.TransformTriangles(objects), width, height, Color.YELLOW);
 
         super.setLayout(new BorderLayout());
 

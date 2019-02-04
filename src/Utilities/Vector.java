@@ -98,10 +98,7 @@ public Vector saturate(){
     }
     return this;
 }
-    public  Vector Transform(Matrix4x4 obj2proj){
-        Vector4 temp = new Matrix4x4().multimatrixbyV3(obj2proj,this);
-        return new Vector(temp.x/temp.w,temp.y/temp.w,temp.z/temp.w);
-    }
+
     public String toString(){
         return ("x: "+this.x+" y: "+this.y+" z: "+this.z);
     }

@@ -53,7 +53,6 @@ public class Painting extends JPanel implements ActionListener {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 for (Triangle object : objects) {
-
                     if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
                         float depth = object.GetDepth(i,j);
                         if(depth > bufforDepth.get(i+width*j)) {
@@ -70,7 +69,7 @@ public class Painting extends JPanel implements ActionListener {
 
 
 
-                    }
+                   }
 
 
                 }
