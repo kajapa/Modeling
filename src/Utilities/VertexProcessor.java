@@ -58,10 +58,10 @@ public class VertexProcessor {
     }
 
     public void multiByRototation(float a, Vector v) {
-        float s = (float) Math.sin(a * PI / 180);
+        float s = (float) Math.sin(Math.toDegrees(a * PI / 180));
         float b =(float)FastMath.sin(a * PI / 180);
 
-        float c = (float) Math.cos(a * PI / 180);
+        float c = (float) Math.cos(Math.toDegrees(a * PI / 180));
         float d=(float) FastMath.cos(a * PI / 180);
       v= v.Normalize();
         Matrix4x4 m = new Matrix4x4(new Vector4(v.x * v.x * (1 - c) + c, v.y * v.x * (1 - c) + v.z * s, v.x * v.z * (1 - c) - v.y * s, 0),
