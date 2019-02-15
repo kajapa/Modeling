@@ -7,16 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VertexProcessor {
-    public Vector col1;
-    public Vector col2;
-    public Vector col3;
+
     public int width;
     public int height;
 
-    public VertexProcessor(Vector col1, Vector col2, Vector col3, int width, int height) {
-        this.col1 = col1;
-        this.col2 = col2;
-        this.col3 = col3;
+    public VertexProcessor( int width, int height) {
+
         this.width = width;
         this.height = height;
     }
@@ -58,10 +54,10 @@ public class VertexProcessor {
     }
 
     public void multiByRototation(float a, Vector v) {
-        float s = (float) Math.sin(Math.toDegrees(a * PI / 180));
+        float s = (float) Math.sin((a * PI) / 180);
         float b =(float)FastMath.sin(a * PI / 180);
 
-        float c = (float) Math.cos(Math.toDegrees(a * PI / 180));
+        float c = (float) Math.cos((a * PI) / 180);
         float d=(float) FastMath.cos(a * PI / 180);
       v= v.Normalize();
         Matrix4x4 m = new Matrix4x4(new Vector4(v.x * v.x * (1 - c) + c, v.y * v.x * (1 - c) + v.z * s, v.x * v.z * (1 - c) - v.y * s, 0),
@@ -98,9 +94,18 @@ public class VertexProcessor {
         List<Triangle> result = new ArrayList<Triangle>();
         for (Triangle tr : objects) {
 
-            result.add(new Triangle(Transform(tr.a), Transform(tr.b), Transform(tr.c), col1, col2, col3, width, height));
+            result.add(new Triangle(Transform(tr.a), Transform(tr.b), Transform(tr.c), tr.getCol1(), tr.getCol2(), tr.getCol3(),tr.n1,tr.n2,tr.n3,tr.DL, width, height));
         }
         return result;
+    }
+
+    public Vector TransormNormal(Vector n)
+    {
+        return new Vector(obj2view.matrix[0].x*n.x+obj2view.matrix[1].x*n.x+obj2view.matrix[2].x*n.x,
+                obj2view.matrix[0].y*n.y+obj2view.matrix[1].y*n.y+obj2view.matrix[2].y*n.y,
+                obj2view.matrix[0].z*n.z+obj2view.matrix[1].z*n.z+obj2view.matrix[2].z*n.z);
+
+
     }
 
 

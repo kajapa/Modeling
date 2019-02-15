@@ -1,7 +1,8 @@
 package Painting;
 
-import Primitives.Object;
+
 import Primitives.Triangle;
+import Utilities.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,7 +12,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Painting extends JPanel implements ActionListener {
@@ -19,13 +24,13 @@ public class Painting extends JPanel implements ActionListener {
     int height;
 
     private BufferedImage paintImage;
-    Color col;
+
     List<Triangle> objects = new ArrayList<Triangle>();
     List<Float> bufforDepth = new  ArrayList<Float>();
 
     JButton button = new JButton("Save Image");
 
-    public Painting(List<Triangle> objects, int width, int height, Color col) {
+    public Painting(List<Triangle> objects, int width, int height) {
         paintImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
         super.setDoubleBuffered(true);
         this.objects = objects;
@@ -36,7 +41,7 @@ public class Painting extends JPanel implements ActionListener {
 
         this.width = width;
         this.height = height;
-        this.col = col;
+
 
         for(int i = 0; i < width * height; i++) {
             bufforDepth.add(-1f);
@@ -53,9 +58,15 @@ public class Painting extends JPanel implements ActionListener {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 for (Triangle object : objects) {
+                    Vector aa=object.a;
+                    Vector bb=object.b;
+                    Vector cc=object.c;
+                    Vector n=object.n1;
                     if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
+                        //System.out.println("check1");
                         float depth = object.GetDepth(i,j);
                         if(depth > bufforDepth.get(i+width*j)) {
+                            //System.out.println("check2");
 
                             g2d.setColor(object.GetInterpolarColor(i, j));
                             g2.setColor(object.GetInterpolarColor(i, j));
@@ -82,7 +93,10 @@ public class Painting extends JPanel implements ActionListener {
 
 
     public void save() throws IOException {
-        ImageIO.write(paintImage, "PNG", new File("savedfile.png"));
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+        ImageIO.write(paintImage, "PNG", new File("savedfile-"+dateFormat.format(date)+".png"));
     }
 
     @Override

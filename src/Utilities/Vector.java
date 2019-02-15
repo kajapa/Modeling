@@ -13,6 +13,7 @@ public class Vector {
         this.y = y;
         this.z = z;
     }
+
     public Vector negate(){
         return new Vector(this.x*-1,this.y*-1,this.z*-1);
     }
@@ -101,6 +102,29 @@ public Vector saturate(){
 
     public String toString(){
         return ("x: "+this.x+" y: "+this.y+" z: "+this.z);
+    }
+    public Vector CheckVector()
+    {
+        //--------x-----------
+        if(this.x<1)
+            this.x=0;
+        if(this.x<0)
+            this.x=0;
+        if(this.x>255)
+            this.x=255;
+        //-------y--------
+        if(this.y<1)
+            this.y=0;
+        if(this.y<0)
+            this.y=0;
+        if(this.y>255)
+            this.y=255;
+        //-------------z----------
+        if(this.z>255)
+            this.z=255;
+        if(this.z<1)
+            this.z=0;
+        return new Vector(this.x,this.y,this.z);
     }
 }
 

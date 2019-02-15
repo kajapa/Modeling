@@ -41,25 +41,27 @@ public class OBJLoader {
 
 
                 int v1 = Integer.valueOf(line.split(" ")[1].split("/")[0]);
-
+                int n1 = Integer.valueOf(line.split(" ")[1].split("/")[2]);
 
                 //System.out.println(v1);
                 int v2 = Integer.valueOf(line.split(" ")[2].split("/")[0]);
+                int n2 = Integer.valueOf(line.split(" ")[2].split("/")[2]);
 
 
                 int v3 = Integer.valueOf(line.split(" ")[3].split("/")[0]);
+                int n3 = Integer.valueOf(line.split(" ")[3].split("/")[2]);
 
 
 
-                int n = Integer.valueOf(line.split(" ")[1].split("/")[2]);
 
 
 
-                //System.out.println(v1+" "+v2+" "+v3+" "+" "+n);
-                // m.faces.add(new Face(v1, v2, v3, n));
+
+                //System.out.println(v1+" "+v2+" "+v3+" "+" "+n1);
+                // m.faces.add(new Face(v1, v2, v3, n1));
 
 
-                m.faces.add(new Face(v1,v2,v3,n));
+                m.faces.add(new Face(v1,v2,v3,n1,n2,n3));
             }
 
 
