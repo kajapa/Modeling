@@ -94,7 +94,7 @@ public class VertexProcessor {
         List<Triangle> result = new ArrayList<Triangle>();
         for (Triangle tr : objects) {
 
-            result.add(new Triangle(Transform(tr.a), Transform(tr.b), Transform(tr.c), tr.getCol1(), tr.getCol2(), tr.getCol3(),tr.n1,tr.n2,tr.n3,tr.DL, width, height));
+            result.add(new Triangle(Transform(tr.a), Transform(tr.b), Transform(tr.c), tr.n1,tr.n2,tr.n3,tr.DL, width, height));
         }
         return result;
     }

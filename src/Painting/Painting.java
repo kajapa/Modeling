@@ -26,7 +26,7 @@ public class Painting extends JPanel implements ActionListener {
     private BufferedImage paintImage;
 
     List<Triangle> objects = new ArrayList<Triangle>();
-    List<Float> bufforDepth = new  ArrayList<Float>();
+    List<Float> bufforDepth = new ArrayList<Float>();
 
     JButton button = new JButton("Save Image");
 
@@ -43,7 +43,7 @@ public class Painting extends JPanel implements ActionListener {
         this.height = height;
 
 
-        for(int i = 0; i < width * height; i++) {
+        for (int i = 0; i < width * height; i++) {
             bufforDepth.add(-1f);
         }
 
@@ -51,21 +51,17 @@ public class Painting extends JPanel implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-
+        long lStartTime = System.currentTimeMillis();
         Graphics2D g2d = (Graphics2D) g;
         Graphics2D g2 = paintImage.createGraphics();
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 for (Triangle object : objects) {
-                    Vector aa=object.a;
-                    Vector bb=object.b;
-                    Vector cc=object.c;
-                    Vector n=object.n1;
                     if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
                         //System.out.println("check1");
-                        float depth = object.GetDepth(i,j);
-                        if(depth > bufforDepth.get(i+width*j)) {
+                        float depth = object.GetDepth(i, j);
+                        if (depth > bufforDepth.get(i + width * j)) {
                             //System.out.println("check2");
 
                             g2d.setColor(object.GetInterpolarColor(i, j));
@@ -74,13 +70,12 @@ public class Painting extends JPanel implements ActionListener {
                             g2d.fillRect(i, j, 1, 1);
                             g2.fillRect(i, j, 1, 1);
 
-                            bufforDepth.set(i+width*j, depth);
+                            bufforDepth.set(i + width * j, depth);
 
                         }
 
 
-
-                   }
+                    }
 
 
                 }
@@ -89,14 +84,17 @@ public class Painting extends JPanel implements ActionListener {
         }
 
 
-    }
+        long lEndTime = System.currentTimeMillis();
+        long output = lEndTime - lStartTime;
+
+        System.out.println("Time Paint: " + output + " ms"); }
 
 
     public void save() throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
         Date date = new Date();
         System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
-        ImageIO.write(paintImage, "PNG", new File("savedfile-"+dateFormat.format(date)+".png"));
+        ImageIO.write(paintImage, "PNG", new File("savedfile-" + dateFormat.format(date) + ".png"));
     }
 
     @Override

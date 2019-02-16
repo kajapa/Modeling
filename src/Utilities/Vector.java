@@ -5,6 +5,19 @@ import java.awt.*;
 public class Vector {
     public float x;
     public float y;
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public void setZ(float z) {
+        this.z = z;
+    }
+
     public float z;
     static float epsilon = 0.0001f;
 
@@ -13,6 +26,7 @@ public class Vector {
         this.y = y;
         this.z = z;
     }
+    public Vector(){}
 
     public Vector negate(){
         return new Vector(this.x*-1,this.y*-1,this.z*-1);

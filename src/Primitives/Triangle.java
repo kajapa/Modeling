@@ -3,24 +3,23 @@ package Primitives;
 import Light.DirectionalLight;
 import Light.Light;
 import Utilities.Vector;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.awt.*;
 
 
-public class Triangle  {
+public class Triangle {
     public Vector a;
     public Vector b;
     public Vector c;
     public Vector n1;
     public Vector n2;
     public Vector n3;
-    public Vector col1;
-    public Vector col2;
-    public Vector col3;
+
     public Vector tempA;
     public Vector tempB;
-   public Vector tempC;
-    public  int width;
+    public Vector tempC;
+    public int width;
     public int height;
     int bar = 20;
     float dx12;
@@ -36,28 +35,22 @@ public class Triangle  {
     float LX32;
     float LY13;
     float LX13;
-   public Light DL;
+    public Light DL;
 
 
-    public Triangle(Vector a, Vector b, Vector c, Vector col1, Vector col2, Vector col3, Vector n1, Vector n2, Vector n3, Light DL, int width, int height) {
+    public Triangle(Vector a, Vector b, Vector c, Vector n1, Vector n2, Vector n3, Light DL, int width, int height) {
 
         this.a = a;
         this.b = b;
         this.c = c;
-        this.n1=n1;
-        this.n2=n2;
-        this.n3=n3;
-        this.DL=DL;
+        this.n1 = n1;
+        this.n2 = n2;
+        this.n3 = n3;
+        this.DL = DL;
 
-        this.tempA = this.a.Interpolar(width, height );
-        this.tempB = this.b.Interpolar(width, height );
-        this.tempC = this.c.Interpolar(width, height );
-        this.col1=col1;
-        this.col2=col2;
-        this.col3=col3;
-
-
-
+        this.tempA = this.a.Interpolar(width, height);
+        this.tempB = this.b.Interpolar(width, height);
+        this.tempC = this.c.Interpolar(width, height);
 
 
         this.dx12 = this.tempA.x - this.tempB.x;
@@ -75,18 +68,6 @@ public class Triangle  {
         this.height = height;
 
 
-    }
-
-    public Vector getCol1() {
-        return col1;
-    }
-
-    public Vector getCol2() {
-        return col2;
-    }
-
-    public Vector getCol3() {
-        return col3;
     }
 
 
@@ -127,10 +108,17 @@ public class Triangle  {
 
 
     public boolean CheckQuad(int x, int y) {
-        float minx = getMin(tempA.x, tempB.x, tempC.x);
-        float maxx = getMax(tempA.x, tempB.x, tempC.x);
-        float miny = getMin(tempA.y, tempB.y, tempC.y);
-        float maxy = getMax(tempA.y, tempB.y, tempC.y);
+
+
+        float minx = Math.min(tempA.x, Math.min(tempB.x, tempC.x));
+
+        float maxx = Math.max(tempA.x, Math.max(tempB.x, tempC.x));
+        float miny = Math.min(tempA.y, Math.min(tempB.y, tempC.y));
+
+
+        float maxy = Math.max(tempA.y, Math.max(tempB.y, tempC.y));
+
+
         minx = Math.max(minx, 0);
         maxx = Math.min(maxx, width - 1);
         miny = Math.max(miny, 0);
@@ -140,15 +128,16 @@ public class Triangle  {
             return true;
         } else
             return false;
+
     }
 
 
     public Color GetInterpolarColor(int x, int y) {
 
         Vector Lambda = GetLambda(x, y);
-        col1=DL.Calculate(a,n1);
-        col2=DL.Calculate(b,n2);
-        col3=DL.Calculate(c,n3);
+        Vector col1 = DL.Calculate(a, n1);
+        Vector col2 = DL.Calculate(b, n2);
+        Vector col3 = DL.Calculate(c, n3);
 
         float red = col1.x * Lambda.x + col2.x * Lambda.y + col3.x * Lambda.z;
         float green = col1.y * Lambda.x + col2.y * Lambda.y + col3.y * Lambda.z;
@@ -172,35 +161,13 @@ public class Triangle  {
 
     }
 
-    public float getMax(float v1, float v2, float v3) {
-        float[] numbers = {v1, v2, v3};
-        float maxValue = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] > maxValue) {
-                maxValue = numbers[i];
-            }
-        }
-        return maxValue;
-    }
-
-    public float getMin(float v1, float v2, float v3) {
-        float[] numbers = {v1, v2, v3};
-        float minValue = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] < minValue) {
-                minValue = numbers[i];
-            }
-        }
-        return minValue;
-    }
+    
 
     public float GetDepth(int x, int y) {
         Vector Lambda = GetLambda(x, y);
 
         return Lambda.x * tempA.z + Lambda.y * tempB.z + Lambda.z * tempC.z;
     }
-
-
 
 
 }

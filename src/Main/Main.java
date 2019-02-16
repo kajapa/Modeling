@@ -31,9 +31,7 @@ public class Main extends JFrame {
     Vector yellow = new Vector(255, 255, 0);
 
 
-    List<Triangle> objects = new ArrayList<Triangle>();
-   // Triangle t = new Triangle(new Vector(-1, 1, 0.5f), new Vector(1, 1, 0.5f), new Vector(1, -1, -1), red, green, blue, width, height);
-   // Triangle t2 = new Triangle(new Vector(-1, -1, 0), new Vector(1, 1, 0), new Vector(1, -1, 0), orange, pink, yellow, width, height);
+
     Loader load = new Loader();
     List<Triangle> triangles = new ArrayList<Triangle>();
     ObjectsList OL= new ObjectsList();
@@ -51,9 +49,11 @@ public class Main extends JFrame {
         DirectionalLight DR = new DirectionalLight(new Vector(0,1,1),new Vector(0,0,0),new Vector(255,0,0),new Vector(100,100,100),50,vt);
         PointLight PL=new PointLight(new Vector(300,0,0),new Vector(0,0,0),new Vector(255,0,0),new Vector(100,100,100),50,vt);
         super.setBackground(Color.BLACK);
+
+
         vt.Obj2world();
        vt.multiByTranslation(new Vector(-300,300,0));
-    // vt.multiByRototation(60,new Vector(0,1,0));
+     vt.multiByRototation(60,new Vector(0,1,0));
         vt.multiByScale(new Vector(0.5f,0.5f,0.5f));
         vt.PrepareTransformation();
 
@@ -62,15 +62,15 @@ public class Main extends JFrame {
 
 
 
-
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj", green, yellow, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj", width, height,PL)));
+        /*
         //-------------------------------------------------------------------------------------------------------------------------------------------
         vt.Obj2world();
         vt.multiByTranslation(new Vector(0,300,0));
        // vt.multiByRototation(90,new Vector(1,0,0));
          vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-         OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("monkey.obj", red, red, green, width, height,PL)));
+         OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("monkey.obj", width, height,PL)));
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
         vt.Obj2world();
@@ -78,7 +78,7 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("cone.obj", red, red, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("cone.obj",  width, height,PL)));
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
         vt.Obj2world();
@@ -86,7 +86,7 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("sphere.obj", red, red, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("sphere.obj",  width, height,PL)));
 
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("torus.obj", red, red, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("torus.obj", width, height,PL)));
 
 
 
@@ -105,7 +105,7 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("cube.obj", red, red, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("cube.obj", width, height,PL)));
 
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,8 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(0.5f,0.5f,0.5f));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj", red, red, green, width, height,PL)));
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj",  width, height,PL)));*/
+
         Painting paint = new Painting(OL.result, width, height);
 
 
@@ -133,6 +134,34 @@ public class Main extends JFrame {
 
 
     }
+    public float getMax(float v1, float v2, float v3) {
+
+// ... the code being measured ...
+        float[] numbers = {v1, v2, v3};
+        float maxValue = numbers[0];
+        for (int i = 0; i < 3; i++) {
+            if (numbers[i] > maxValue) {
+                maxValue = numbers[i];
+            }
+        }
+      //float maxValue=Math.max(v1,Math.max(v2,v3));
+
+        return maxValue;
+    }
+
+    public float getMin(float v1, float v2, float v3) {
+
+        float[] numbers = {v1, v2, v3};
+        float minValue = numbers[0];
+        for (int i = 0; i < 3; i++) {
+            if (numbers[i] < minValue) {
+                minValue = numbers[i];
+            }
+        }
+
+        return minValue;
+    }
+
 
     public static void main(String[] args) throws IOException {
         new Main();
