@@ -1,7 +1,7 @@
 package Utilities;
 
 import Primitives.Triangle;
-import net.jafama.FastMath;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class VertexProcessor {
 
     public void setLookat(Vector eye, Vector center, Vector up) {
         Vector f = center.subtract(eye);
-        f.Normalize();
+       f= f.Normalize();
         Vector s = f.cross(up);
         Vector u = s.cross(f);
         world2view = new Matrix4x4(new Vector4(s.x, u.x, -f.x, 0), new Vector4(s.y, u.y, -f.y, 0), new Vector4(s.z, u.z, -f.z, 0), new Vector4(eye.negate(), 1));
@@ -55,10 +55,10 @@ public class VertexProcessor {
 
     public void multiByRototation(float a, Vector v) {
         float s = (float) Math.sin((a * PI) / 180);
-        float b =(float)FastMath.sin(a * PI / 180);
+
 
         float c = (float) Math.cos((a * PI) / 180);
-        float d=(float) FastMath.cos(a * PI / 180);
+
       v= v.Normalize();
         Matrix4x4 m = new Matrix4x4(new Vector4(v.x * v.x * (1 - c) + c, v.y * v.x * (1 - c) + v.z * s, v.x * v.z * (1 - c) - v.y * s, 0),
                 new Vector4(v.x * v.y * (1 - c) - v.z * s, v.y * v.y * (1 - c) + c, v.y * v.z * (1 - c) + v.x * s, 0),

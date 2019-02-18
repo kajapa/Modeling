@@ -25,26 +25,27 @@ public class Painting extends JPanel implements ActionListener {
 
     private BufferedImage paintImage;
 
-    List<Triangle> objects = new ArrayList<Triangle>();
-    List<Float> bufforDepth = new ArrayList<Float>();
+    Triangle[] objects ;
+    float[] bufforDepth ;
+    int size;
 
     JButton button = new JButton("Save Image");
 
-    public Painting(List<Triangle> objects, int width, int height) {
+    public Painting(Triangle []objects, int width, int height) {
         paintImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
         super.setDoubleBuffered(true);
         this.objects = objects;
 
         button.addActionListener(this);
         super.add(button);
-
+        this.size=objects.length;
 
         this.width = width;
         this.height = height;
 
-
+        this.bufforDepth= new float[width * height];
         for (int i = 0; i < width * height; i++) {
-            bufforDepth.add(-1f);
+            bufforDepth[i]=1f;
         }
 
     }
@@ -55,22 +56,22 @@ public class Painting extends JPanel implements ActionListener {
         Graphics2D g2d = (Graphics2D) g;
         Graphics2D g2 = paintImage.createGraphics();
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                for (Triangle object : objects) {
-                    if (object.CheckQuad(i, j) && object.SetPixel(i, j)) {
+        for (int i = 0; i < width; ++i) {
+            for (int j = 0; j < height; ++j) {
+                for (int t=0;t<size;++t) {
+                    if (objects[t].CheckQuad(i, j) && objects[t].SetPixel(i, j)) {
                         //System.out.println("check1");
-                        float depth = object.GetDepth(i, j);
-                        if (depth > bufforDepth.get(i + width * j)) {
+                        float depth = objects[t].GetDepth(i, j);
+                        if (depth > bufforDepth[i + width * j]) {
                             //System.out.println("check2");
 
-                            g2d.setColor(object.GetInterpolarColor(i, j));
-                            g2.setColor(object.GetInterpolarColor(i, j));
+                            g2d.setColor(objects[t].GetInterpolarColor(i, j));
+                            g2.setColor(objects[t].GetInterpolarColor(i, j));
 
                             g2d.fillRect(i, j, 1, 1);
                             g2.fillRect(i, j, 1, 1);
 
-                            bufforDepth.set(i + width * j, depth);
+                            bufforDepth[i + width * j]= depth;
 
                         }
 

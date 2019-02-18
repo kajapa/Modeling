@@ -3,7 +3,7 @@ package Primitives;
 import Light.DirectionalLight;
 import Light.Light;
 import Utilities.Vector;
-import org.apache.commons.lang3.math.NumberUtils;
+
 
 import java.awt.*;
 
@@ -73,16 +73,17 @@ public class Triangle {
 
     public boolean SetPixel(int x, int y) {
         boolean tl1 = false;
+
         boolean tl2 = false;
         boolean tl3 = false;
         if (dy12 < 0 || (dy12 == 0 && dx12 > 0)) {
             tl1 = true;
-            // System.out.println("Check1");
+
         }
 
         if (dy23 < 0 || (dy23 == 0 && dx23 > 0)) {
             tl2 = true;
-            // System.out.println("Check2");
+
         }
 
         if (dy31 < 0 || (dy31 == 0 && dx31 > 0)) {
@@ -100,7 +101,7 @@ public class Triangle {
 
             return true;
         } else {
-            //System.out.println("Nope");
+
             return false;
         }
 
@@ -143,25 +144,25 @@ public class Triangle {
         float green = col1.y * Lambda.x + col2.y * Lambda.y + col3.y * Lambda.z;
         float blue = col1.z * Lambda.x + col2.z * Lambda.y + col3.z * Lambda.z;
 
-        Vector result = new Vector(red, green, blue).CheckVector();
 
 
-        return result.VectortoColor();
+
+        return new Vector(red, green, blue).CheckVector().VectortoColor();
     }
 
 
     public Vector GetLambda(int x, int y) {
-        Vector res;
+
         L1 = ((dy23 * (x - tempC.x)) + (LX32 * (y - tempC.y))) / ((dy23 * (tempA.x - tempC.x)) + (LX32 * (tempA.y - tempC.y)));
 
         L2 = ((dy31) * (x - tempC.x) + (LX13) * (y - tempC.y)) / ((dy31) * (tempB.x - tempC.x) + (LX13) * (tempB.y - tempC.y));
         L3 = 1 - L1 - L2;
-        res = new Vector(L1, L2, L3);
-        return res;
+
+        return new Vector(L1, L2, L3);
 
     }
 
-    
+
 
     public float GetDepth(int x, int y) {
         Vector Lambda = GetLambda(x, y);

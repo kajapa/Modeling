@@ -28,9 +28,8 @@ public  class DirectionalLight extends  Light {
 
         //skalar R i V potega shin razy specular
 
-        Vector res=ambient.addVector(localdiff).addVector(localspec);
-        res.CheckVector();
-        return res;
+
+        return ambient.addVector(localdiff).addVector(localspec).CheckVector();
     }
 
     public float Clamp(float in)

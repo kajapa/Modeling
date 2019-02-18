@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ObjectsList {
    public List<Triangle> result= new ArrayList<Triangle>();
+   public Triangle[] res;
     public List<Triangle> TransferObject(List<Triangle> in)
     {
 
@@ -17,5 +18,14 @@ public class ObjectsList {
         }
         return result;
     }
+    public void TransfertoArray()
+    {
+        res=new Triangle[result.size()];
+        res=result.toArray(res);
+
+
+
+    }
+
 
 }

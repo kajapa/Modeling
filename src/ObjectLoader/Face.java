@@ -20,19 +20,4 @@ public class Face {
 
     }
 
-    public void setV1(int v1) {
-        this.v1 = v1;
-    }
-
-    public void setV2(int v2) {
-        this.v2 = v2;
-    }
-
-    public void setV3(int v3) {
-        this.v3 = v3;
-    }
-
-    public void setN1(int n1) {
-        this.n1 = n1;
-    }
-}
+  }

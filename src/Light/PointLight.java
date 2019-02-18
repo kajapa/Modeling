@@ -24,9 +24,8 @@ public class PointLight extends Light {
         Vector localspec = specular.multiplyby((float) Math.pow(Clamp(R.dot(V)), shininess));
 
 
-        Vector res = ambient.addVector(localdiff).addVector(localspec);
-        res.CheckVector();
-        return res;
+
+        return ambient.addVector(localdiff).addVector(localspec).CheckVector();
     }
 
     public float Clamp(float in) {

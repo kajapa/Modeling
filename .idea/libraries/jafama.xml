@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="jafama">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jafama.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen-rt-android-natives-windows-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen-rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gluegen.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jogl-all-android-natives-windows-amd64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jogl-all.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

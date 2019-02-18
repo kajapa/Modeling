@@ -26,6 +26,7 @@ public class Vector {
         this.y = y;
         this.z = z;
     }
+
     public Vector(){}
 
     public Vector negate(){
