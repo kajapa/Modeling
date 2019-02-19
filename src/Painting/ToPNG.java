@@ -2,12 +2,10 @@ package Painting;
 
 import Primitives.Triangle;
 
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CanvasPaint extends JPanel implements ActionListener {
+public class ToPNG {
+
     int width;
     int height;
 
@@ -27,16 +26,15 @@ public class CanvasPaint extends JPanel implements ActionListener {
     List<Float> bufforDepth = new ArrayList<Float>();
     float[] bufford;
 
-    JButton button = new JButton("Save Image");
 
-    public CanvasPaint(Triangle[] obj, int width, int height) {
+
+    public ToPNG(Triangle[] obj, int width, int height) {
         paintImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-        super.setDoubleBuffered(true);
+
 
 
         this.obj = obj;
-        button.addActionListener(this);
-        super.add(button);
+
 
 
 
@@ -44,7 +42,7 @@ public class CanvasPaint extends JPanel implements ActionListener {
 
         this.width = width;
         this.height = height;
-            this.bufford=new float[width * height];
+        this.bufford=new float[width * height];
         for(int i = 0; i < width * height; i++)
         {
             bufford[i]=-1f;
@@ -57,11 +55,10 @@ public class CanvasPaint extends JPanel implements ActionListener {
     }
 
 
-    public void paintComponent(Graphics g)
-    {
+    public void Draw() throws IOException {
 
         long lStartTime = System.currentTimeMillis();
-        Graphics2D g2d = (Graphics2D) g;
+
         Graphics2D g2 = paintImage.createGraphics();
         int size= obj.length;
         int combo=width*height;
@@ -79,10 +76,10 @@ public class CanvasPaint extends JPanel implements ActionListener {
                     if (depth > bufford[h + width * w]) {
                         //System.out.println("check2");
 
-                        g2d.setColor(obj[t].GetInterpolarColor(h, w));
+
                         g2.setColor(obj[t].GetInterpolarColor(h, w));
 
-                        g2d.fillRect(h, w, 1, 1);
+
                         g2.fillRect(h, w, 1, 1);
 
                         bufford[h + width * w]= depth;
@@ -94,36 +91,11 @@ public class CanvasPaint extends JPanel implements ActionListener {
 
 
             }
-           ++w;
+            ++w;
 
         }
-        /*for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                for (int t=0;t<size;++t) {
-                    if (obj[t].CheckQuad(i, j) && obj[t].SetPixel(i, j)) {
-                        //System.out.println("check1");
-                        float depth = obj[t].GetDepth(i, j);
-                        if (depth > bufford[i + width * j]) {
-                            //System.out.println("check2");
+        save();
 
-                            g2d.setColor(obj[t].GetInterpolarColor(i, j));
-                            g2.setColor(obj[t].GetInterpolarColor(i, j));
-
-                            g2d.fillRect(i, j, 1, 1);
-                            g2.fillRect(i, j, 1, 1);
-
-                            bufford[i + width * j]= depth;
-
-                        }
-
-
-                    }
-
-
-                }
-
-            }
-        }*/
 
 
         long lEndTime = System.currentTimeMillis();
@@ -137,15 +109,5 @@ public class CanvasPaint extends JPanel implements ActionListener {
         ImageIO.write(paintImage, "PNG", new File("savedfile-" + dateFormat.format(date) + ".png"));
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        try {
-            save();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
 
-        button.setBackground(Color.GREEN);
-    }
-    }
-
+}

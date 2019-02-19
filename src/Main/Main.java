@@ -10,7 +10,7 @@ import Light.DirectionalLight;
 import Light.PointLight;
 import ObjectLoader.Loader;
 import ObjectLoader.ObjectsList;
-import Painting.Painting;
+import Painting.*;
 import Painting.CanvasPaint;
 import Primitives.Object;
 import Primitives.Triangle;
@@ -67,15 +67,15 @@ public class Main extends JFrame {
 
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
-        /*vt.Obj2world();
+        vt.Obj2world();
         vt.multiByTranslation(new Vector(0,300,0));
        // vt.multiByRototation(90,new Vector(1,0,0));
          vt.multiByScale(new Vector(50,50,50));
         vt.PrepareTransformation();
-         OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("monkey.obj", width, height,PL)));*/
+         OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("monkey.obj", width, height,PL)));
 
         //-------------------------------------------------------------------------------------------------------------------------------------------
-       /* vt.Obj2world();
+        vt.Obj2world();
         vt.multiByTranslation(new Vector(200,250,0));
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(50,50,50));
@@ -116,11 +116,13 @@ public class Main extends JFrame {
         // vt.multiByRototation(90,new Vector(1,0,0));
         vt.multiByScale(new Vector(0.5f,0.5f,0.5f));
         vt.PrepareTransformation();
-        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj",  width, height,PL)));*/
+        OL.TransferObject(vt.TransformTriangles(load.LoadTriangles("czajnik.obj",  width, height,PL)));
         OL.TransfertoArray();
-    Painting paint = new Painting(OL.res, width, height);
+   // Painting paint = new Painting(OL.res, width, height);
 
-     CanvasPaint cpain = new CanvasPaint(OL.res, width, height);
+    // CanvasPaint cpain = new CanvasPaint(OL.res, width, height);
+        ToPNG png = new ToPNG(OL.res, width, height);
+        png.Draw();
 
 
 
@@ -133,7 +135,7 @@ public class Main extends JFrame {
         super.setLocation(0, 0);
         super.setResizable(false);
 
-        super.add(cpain);
+        //super.add(cpain);
 
 
         super.setVisible(true);
