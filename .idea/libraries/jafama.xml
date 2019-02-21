@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="jafama">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/gluegen-rt-android-natives-windows-amd64.jar!/" />
-      <root url="jar://$PROJECT_DIR$/gluegen-rt.jar!/" />
-      <root url="jar://$PROJECT_DIR$/gluegen.jar!/" />
-      <root url="jar://$PROJECT_DIR$/jogl-all-android-natives-windows-amd64.jar!/" />
-      <root url="jar://$PROJECT_DIR$/jogl-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/image4j-0.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ij.jar!/" />
+      <root url="jar://$PROJECT_DIR$/marvin_1.5.5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

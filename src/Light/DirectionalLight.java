@@ -14,19 +14,13 @@ public  class DirectionalLight extends  Light {
     public Vector Calculate(Vector pos,Vector normal) {
 
         Vector N= vp.TransormNormal(normal);
-       Vector4 temp =Matrix4x4.multimatrixbyV3(vp.obj2view,pos.negate());
+       Vector4 temp =Matrix4x4.multimatrixbyV3(vp.tolight,pos.negate());
        Vector V=new Vector(temp.x,temp.y,temp.z).Normalize();
        /// N relfect light pos
-        Vector R=N.reflect(pos).Normalize();
+        Vector R=position.reflect(N).Normalize();
         Vector localdiff=diffuse.multiplyby(Clamp(position.dot(N))) ;
         Vector localspec=specular.multiplyby((float) Math.pow(Clamp(R.dot(V)),shininess));
-        //r normal
 
-
-        //light pos skalr N normal
-        //pomnoz przez diff light
-
-        //skalar R i V potega shin razy specular
 
 
         return ambient.addVector(localdiff).addVector(localspec).CheckVector();

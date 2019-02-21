@@ -69,6 +69,37 @@ public class Triangle {
 
 
     }
+    public Triangle(Vector a, Vector b, Vector c, Vector n1, Vector n2, Vector n3, int width, int height) {
+
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.n1 = n1;
+        this.n2 = n2;
+        this.n3 = n3;
+
+
+        this.tempA = this.a.Interpolar(width, height);
+        this.tempB = this.b.Interpolar(width, height);
+        this.tempC = this.c.Interpolar(width, height);
+
+
+        this.dx12 = this.tempA.x - this.tempB.x;
+        this.dx23 = this.tempB.x - this.tempC.x;
+        this.dx31 = this.tempC.x - this.tempA.x;
+        this.dy12 = this.tempA.y - this.tempB.y;
+        this.dy23 = this.tempB.y - this.tempC.y;
+        this.dy31 = this.tempC.y - this.tempA.y;
+
+        this.LX32 = this.tempC.x - this.tempB.x;
+        this.LY13 = this.tempA.y - this.tempC.y;
+        this.LX13 = this.tempA.x - this.tempC.x;
+
+        this.width = width;
+        this.height = height;
+
+
+    }
 
 
     public boolean SetPixel(int x, int y) {

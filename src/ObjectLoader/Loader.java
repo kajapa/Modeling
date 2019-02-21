@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Loader {
 
-    public List<Triangle> LoadTriangles(String file,  int width, int height, Light DR) {
+    public List<Triangle> LoadTriangles(String file,  int width, int height) {
         //long startTime = System.nanoTime();
         long lStartTime = System.currentTimeMillis();
 
@@ -52,7 +52,7 @@ public class Loader {
 
 
 
-            result.add(new Triangle(v1, v2, v3, n1, n2, n3, DR, width, height));
+            result.add(new Triangle(v1, v2, v3, n1, n2, n3,  width, height));
 
 
         }

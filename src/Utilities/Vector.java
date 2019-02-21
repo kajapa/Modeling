@@ -89,8 +89,10 @@ public class Vector {
 
 public Vector reflect(Vector n)
 {
-    n=n.Normalize();
-    return this.subtract(n.multiplyby(2*n.dot(this)));
+    //n=n.Normalize();
+
+    return this.subtract(n.multiplyby(this.dot(n)*2));
+    //this.subtract(n.multiplyby(2*n.dot(this)));
 
 }
 public Vector saturate(){

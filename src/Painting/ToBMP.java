@@ -1,6 +1,10 @@
 package Painting;
 
 import Primitives.Triangle;
+import ij.ImageJ;
+import marvin.image.MarvinImage;
+import marvin.io.MarvinImageIO;
+import net.sf.image4j.codec.bmp.BMPEncoder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ToPNG {
+public class ToBMP {
 
     int width;
     int height;
@@ -28,7 +32,7 @@ public class ToPNG {
 
 
 
-    public ToPNG(Triangle[] obj, int width, int height) {
+    public ToBMP(Triangle[] obj, int width, int height) {
         paintImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 
 
@@ -56,6 +60,7 @@ public class ToPNG {
 
 
     public void Draw() throws IOException {
+
 
         long lStartTime = System.currentTimeMillis();
 
@@ -107,7 +112,8 @@ public class ToPNG {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
         Date date = new Date();
         System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
-        ImageIO.write(paintImage, "PNG", new File("render/savedfile-" + dateFormat.format(date) + ".png"));
+         //BMPEncoder.write(paintImage,  new File("render/savedfile-" + dateFormat.format(date) + ".bmp"));
+        MarvinImageIO.saveImage(new MarvinImage(paintImage), "render/savedfile-" + dateFormat.format(date) + ".bmp");
     }
 
 
